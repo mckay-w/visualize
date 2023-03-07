@@ -18,7 +18,15 @@ if __name__=="__main__":
     width=1400
     canvas=handler.canvasInit(width,height)
     #handler.drawTree(canvas,nodes,width,height)
-    handler.drawPath(nodes,1723,canvas,width,height)
-    cv2.imshow("Canvas", canvas) #10
+    #handler.drawPath(nodes,1723,canvas,width,height)
+    handler.drawTree(canvas,nodes,width,height)
+    print(canvas.size)
+    #print(canvas)
+    #canvas.resize(canvas,(2,4))
+    res = cv2.resize(canvas, dsize=(height*3, width*3), interpolation=cv2.INTER_LANCZOS4)
+
+    #scaled_canvas=canvas.copy()
+    #scaled_canvas.thumbnail(target_size,)
+    cv2.imshow("Canvas", res) #10
     cv2.waitKey(0) #11
     cv2.destroyAllWindows()

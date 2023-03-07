@@ -5,11 +5,14 @@ from tkinter import *
 import math
 
 
+
 # colors=[(199, 237, 204),(0,0,0),(250, 249, 222),(220, 226, 241),(253, 230, 224)] # 太浅了
 colors=[(7,128,207),(118,80,5),(250,109,29),(14,44,130),(182,181,31),(218,31,24),(112,24,102),(244,122,117)]
 
 def canvasInit(width,height):
     canvas = np.full((height, width, 3), 255,dtype="uint8") #3
+    #cv2.namedWindow('Canvas', cv2.WINDOW_NORMAL)
+    #cv2.namedWindow('Canvas', cv2.WINDOW_GUI_NORMAL)
     cv2.imshow("Canvas", canvas) #10
     #cv2.waitKey(0) #11
     return canvas
@@ -37,7 +40,7 @@ def drawTree(canvas,nodes,width,height):
             #create_text(x,y,nodes[index])
             if pow!=0:
                 drawEdge(canvas,(x-xinterval,y+yinterval/2-(index%2)*yinterval),(x,y),(0, 255, 0),1)
-                cv2.imshow("Canvas", canvas) 
+                #cv2.imshow("Canvas", canvas) 
                 #drawEdge(canvas,(0,10),(200,20),(0, 0, 255),1)
         index=index+1
         if index==2**(pow+1)-1:
