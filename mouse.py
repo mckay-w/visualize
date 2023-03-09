@@ -105,38 +105,41 @@ def mouse(event, x, y, flags, param):
     cv2.waitKey(1)
 
 
-img_original = cv2.imread("E:\\vs\\image\\2.png")  # 此处需换成大于img_w * img_h的图片
-img_original_h, img_original_w = img_original.shape[0:2]  # 原图宽高
-cv2.namedWindow('img', cv2.WINDOW_NORMAL)
-cv2.moveWindow("img", 300, 100)
-img = img_original.copy()
-img_h, img_w = img.shape[0:2]  # 原图宽高
-show_h, show_w = 600, 800  # 显示图片宽高
-horizontal, vertical = 0, 0  # 原图是否超出显示图片
-dx, dy = 0, 0  # 显示图片相对于原图的坐标
-scroll_w = 16  # 滚动条宽度
-sx, sy = 0, 0  # 滚动块相对于滚动条的坐标
-flag, flag_hor, flag_ver = 0, 0, 0  # 鼠标操作类型，鼠标是否在水平滚动条上，鼠标是否在垂直滚动条上
-x1, y1, x2, y2, x3, y3 = 0, 0, 0, 0, 0, 0  # 中间变量
-win_w, win_h = show_w + scroll_w, show_h + scroll_w  # 窗口宽高
-scroll_har, scroll_var = win_w * show_w / img_w, win_h * show_h / img_h  # 滚动条水平垂直长度
-wheel_step, zoom = 0.05, 1  # 缩放系数， 缩放值
-zoom_w, zoom_h = img_w, img_h  # 缩放图宽高
-f1, f2 = (img_w - show_w) / (win_w - scroll_har), (img_h - show_h) / (win_h - scroll_var)  # 原图可移动部分占滚动条可移动部分的比例
+def drawBar():
+    
 
-if img_h <= show_h and img_w <= show_w:
-    cv2.imshow("img", img)
-else:
-    if img_w > show_w:
-        horizontal = 1
-    if img_h > show_h:
-        vertical = 1
-    i = img[dy:dy + show_h, dx:dx + show_w]
-    dst = i.copy()
-cv2.resizeWindow("img", win_w, win_h)
-cv2.setMouseCallback('img', mouse)
+    img_original = cv2.imread("E:\\vs\\image\\2.png")  # 此处需换成大于img_w * img_h的图片
+    img_original_h, img_original_w = img_original.shape[0:2]  # 原图宽高
+    cv2.namedWindow('img', cv2.WINDOW_NORMAL)
+    cv2.moveWindow("img", 300, 100)
+    img = img_original.copy()
+    img_h, img_w = img.shape[0:2]  # 原图宽高
+    show_h, show_w = 600, 800  # 显示图片宽高
+    horizontal, vertical = 0, 0  # 原图是否超出显示图片
+    dx, dy = 0, 0  # 显示图片相对于原图的坐标
+    scroll_w = 16  # 滚动条宽度
+    sx, sy = 0, 0  # 滚动块相对于滚动条的坐标
+    flag, flag_hor, flag_ver = 0, 0, 0  # 鼠标操作类型，鼠标是否在水平滚动条上，鼠标是否在垂直滚动条上
+    x1, y1, x2, y2, x3, y3 = 0, 0, 0, 0, 0, 0  # 中间变量
+    win_w, win_h = show_w + scroll_w, show_h + scroll_w  # 窗口宽高
+    scroll_har, scroll_var = win_w * show_w / img_w, win_h * show_h / img_h  # 滚动条水平垂直长度
+    wheel_step, zoom = 0.05, 1  # 缩放系数， 缩放值
+    zoom_w, zoom_h = img_w, img_h  # 缩放图宽高
+    f1, f2 = (img_w - show_w) / (win_w - scroll_har), (img_h - show_h) / (win_h - scroll_var)  # 原图可移动部分占滚动条可移动部分的比例
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+    if img_h <= show_h and img_w <= show_w:
+        cv2.imshow("img", img)
+    else:
+        if img_w > show_w:
+            horizontal = 1
+        if img_h > show_h:
+            vertical = 1
+        i = img[dy:dy + show_h, dx:dx + show_w]
+        dst = i.copy()
+    cv2.resizeWindow("img", win_w, win_h)
+    cv2.setMouseCallback('img', mouse)
+
+    cv2.waitKey()
+    cv2.destroyAllWindows()
 
 
