@@ -32,19 +32,23 @@ def drawTree(canvas,nodes,width,height):
     pow=0
     xinterval=width/math.ceil(math.log(len(nodes),2))
     yinterval=height/2**(pow+1)
+    color=colors[(pow+3)%len(colors)]
     while nodes[index]!="end":
         y=y-yinterval
         if nodes[index]!="X" or nodes[index]!="x":
             #cv2.putText(canvas,nodes[index],tuple(map(int,(x,y))),cv2.FONT_HERSHEY_SIMPLEX,0.5,(26,73,92))
-            cv2.putText(canvas,str(nodes[index]),tuple(map(int,(x,y))),cv2.FONT_HERSHEY_SIMPLEX,0.5,colors[(pow+3)%len(colors)])
+            
+            cv2.putText(canvas,str(nodes[index]),tuple(map(int,(x,y))),cv2.FONT_HERSHEY_SIMPLEX,0.5,color)
             #create_text(x,y,nodes[index])
             if pow!=0:
-                drawEdge(canvas,(x-xinterval,y+yinterval/2-(index%2)*yinterval),(x,y),(0, 255, 0),1)
+                drawEdge(canvas,(x-xinterval,y+yinterval/2-(index%2)*yinterval),(x,y),color2,2)
                 #cv2.imshow("Canvas", canvas) 
                 #drawEdge(canvas,(0,10),(200,20),(0, 0, 255),1)
         index=index+1
         if index==2**(pow+1)-1:
             pow=pow+1 # level+1
+            color=colors[(pow+3)%len(colors)]
+            color2=colors[(pow)%len(colors)]
             x=x+xinterval
             yinterval=height/(2**pow+1)
             y=height
@@ -84,3 +88,4 @@ def getTree(nodes):
     node=input().split()
     while node!="end":
         nodes.append(node)
+
